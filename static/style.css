@@ -1208,3 +1208,166 @@ tr:last-child td {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
 }
+
+/* ==========================================================================
+   Mobile Responsiveness (max-width: 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* Base */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* Layout */
+    .dashboard-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* Sidebar Top Navigation */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        position: relative;
+        z-index: 50;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        margin-bottom: 1.5rem;
+        justify-content: center;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .nav-links::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .nav-links::-webkit-scrollbar-thumb {
+        background: rgba(56, 189, 248, 0.3);
+        border-radius: 10px;
+    }
+
+    .nav-links li {
+        flex: 0 0 auto;
+        margin-bottom: 0;
+    }
+
+    .nav-links a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Main Content */
+    .main-content {
+        padding: 2rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .header h1 {
+        font-size: 2.2rem;
+    }
+
+    .user-profile {
+        width: 100%;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    /* Grid & Cards */
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .stat-card ion-icon {
+        font-size: 6rem;
+    }
+
+    .stat-card .value {
+        font-size: 2.5rem;
+    }
+
+    /* Table Container */
+    .table-container {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table {
+        min-width: 600px; /* Force scroll on small screens */
+    }
+
+    th, td {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Login Page */
+    .login-box {
+        width: 90%;
+        max-width: 440px;
+        padding: 2.5rem 1.5rem;
+        box-sizing: border-box;
+    }
+
+    .login-box h2 {
+        font-size: 2rem;
+    }
+
+    /* Chatbot Widget & Window */
+    .chat-widget {
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
+    .chat-window {
+        bottom: 6rem;
+        right: 1rem;
+        width: calc(100% - 2rem);
+        max-width: 400px;
+        height: 500px;
+        max-height: calc(100vh - 8rem);
+    }
+}
+
+/* Very Small Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .chat-window {
+        height: 450px;
+    }
+}
