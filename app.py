@@ -37,6 +37,35 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def init_db():
+    import create_db
+    import setup_chat_db
+    
+    # Ensure the scripts use the same DB connected to the app
+    create_db.DB_NAME = DB_NAME
+    setup_chat_db.DB_NAME = DB_NAME
+    
+    conn = get_db_connection()
+    try:
+        # Check if users table exists
+        table_exists = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users'").fetchone()
+        
+        if not table_exists:
+            print("Database 'users' table not found. Initializing database with default data...")
+            # create_db.insert_data() drops and recreates tables, then inserts default data
+            create_db.insert_data()
+            
+            # setup_chat_db ensures chat_messages table is also created
+            setup_chat_db.create_chat_table()
+            print("Database initialization complete.")
+    except Exception as e:
+        print(f"Error during database initialization: {e}")
+    finally:
+        conn.close()
+
+# Automatically initialize the database when the application starts
+init_db()
+
 # AI CHATBOT LOGIC (GEN AI UPGRADE)
 # --------------------------------------------------------------------------
 
