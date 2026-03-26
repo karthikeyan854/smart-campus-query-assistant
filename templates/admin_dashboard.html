@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <h2>Admin Control Panel</h2>
+
+    <!-- Search Form -->
+    <div style="margin-top: 1.5rem; max-width: 500px;">
+        <h3>Search Student Details</h3>
+        <form action="/admin" method="POST" style="display: flex; gap: 1rem;">
+            <input type="text" name="roll_no" placeholder="Enter Student Roll No (e.g., 2024001)" required
+                style="flex: 1; padding: 0.75rem; border-radius: 8px; border: var(--glass-border); background: rgba(255,255,255,0.05); color: white;">
+            <button type="submit" class="btn-primary" style="width: auto;">Search</button>
+        </form>
+        {% if search_error %}
+        <p style="color: #ef4444; margin-top: 1rem;">{{ search_error }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% if student_data %}
+<div class="glass" style="padding: 2rem; animation: slideUp 0.5s ease-out;">
+    <!-- USER DETAILS EDIT SECTION -->
+    <div style="margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="margin: 0; color: var(--primary);">Edit Student Details</h2>
+            <div class="avatar" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                {{ student_data.user['username'][0] }}
+            </div>
+        </div>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div>
+                <label>Roll No</label>
+                <input type="text" id="edit-roll" value="{{ student_data.user['roll_no'] }}" class="form-input">
+            </div>
+            <div>
+                <label>Course</label>
+                <input type="text" id="edit-course" value="{{ student_data.user['course'] }}" class="form-input">
+            </div>
+            <div>
+                <label>Year</label>
+                <input type="text" id="edit-year" value="{{ student_data.user['year'] }}" class="form-input">
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+                <button onclick="updateStudent({{ student_data.user['id'] }})" class="btn-primary"
+                    style="padding: 0.5rem 1rem;">Update Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATA GRIDS -->
+    <div class="grid">
+        <!-- ACADEMICS -->
+        <div class="glass stat-card tilt-card" style="text-align: left;">
+            <h3 style="color: var(--secondary);">Academics</h3>
+            <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.8rem;">GPA</label>
+                <input type="number" step="0.01" id="edit-gpa"
+                    value="{{ student_data.academics['gpa'] if student_data.academics else 0 }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Subjects</label>
+                <input type="text" id="edit-subjects"
+                    value="{{ student_data.academics['subjects'] if student_data.academics else '' }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <button onclick="updateAcademics({{ student_data.user['id'] }})" class="btn-secondary"
+                    style="width: 100%; margin-top: 0.5rem;">Update Academics</button>
+            </div>
+        </div>
+
+        <!-- ATTENDANCE -->
+        <div class="glass stat-card tilt-card" style="text-align: left;">
+            <h3 style="color: var(--accent);">Attendance</h3>
+            <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.8rem;">Total Classes</label>
+                <input type="number" id="edit-total-classes"
+                    value="{{ student_data.attendance['total_classes'] if student_data.attendance else 0 }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Attended</label>
+                <input type="number" id="edit-attended"
+                    value="{{ student_data.attendance['attended_classes'] if student_data.attendance else 0 }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Percentage</label>
+                <input type="number" step="0.1" id="edit-percentage"
+                    value="{{ student_data.attendance['percentage'] if student_data.attendance else 0 }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <button onclick="updateAttendance({{ student_data.user['id'] }})" class="btn-secondary"
+                    style="width: 100%; margin-top: 0.5rem;">Update Attendance</button>
+            </div>
+        </div>
+
+        <!-- FEES -->
+        <div class="glass stat-card tilt-card" style="text-align: left;">
+            <h3 style="color: #ef4444;">Fees</h3>
+            <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.8rem;">Total Fee (₹)</label>
+                <input type="number" id="edit-total-fee"
+                    value="{{ student_data.fees['total_fee'] if student_data.fees else 0 }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Paid (₹)</label>
+                <input type="number" id="edit-paid" value="{{ student_data.fees['paid'] if student_data.fees else 0 }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Due (₹)</label>
+                <input type="number" id="edit-due" value="{{ student_data.fees['due'] if student_data.fees else 0 }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <button onclick="updateFees({{ student_data.user['id'] }})" class="btn-secondary"
+                    style="width: 100%; margin-top: 0.5rem;">Update Fees</button>
+            </div>
+        </div>
+
+        <!-- EXAMS -->
+        <div class="glass stat-card tilt-card" style="text-align: left;">
+            <h3 style="color: #f59e0b;">Exams</h3>
+            <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.8rem;">Exam Name</label>
+                <input type="text" id="edit-exam-name"
+                    value="{{ student_data.exams['exam_name'] if student_data.exams else '' }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Score</label>
+                <input type="number" id="edit-score"
+                    value="{{ student_data.exams['score'] if student_data.exams else 0 }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Result</label>
+                <input type="text" id="edit-result"
+                    value="{{ student_data.exams['result'] if student_data.exams else '' }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <button onclick="updateExams({{ student_data.user['id'] }})" class="btn-secondary"
+                    style="width: 100%; margin-top: 0.5rem;">Update Exams</button>
+            </div>
+        </div>
+
+        <!-- LIBRARY -->
+        <div class="glass stat-card tilt-card" style="text-align: left;">
+            <h3 style="color: #8b5cf6;">Library</h3>
+            <div style="margin-top: 0.5rem;">
+                <label style="font-size: 0.8rem;">Books Issued</label>
+                <input type="text" id="edit-books"
+                    value="{{ student_data.library['books_issued'] if student_data.library else '' }}"
+                    class="form-input" style="width: 100%; margin-bottom: 0.5rem;">
+
+                <label style="font-size: 0.8rem;">Fine (₹)</label>
+                <input type="number" id="edit-fine"
+                    value="{{ student_data.library['fine'] if student_data.library else 0 }}" class="form-input"
+                    style="width: 100%; margin-bottom: 0.5rem;">
+
+                <button onclick="updateLibrary({{ student_data.user['id'] }})" class="btn-secondary"
+                    style="width: 100%; margin-top: 0.5rem;">Update Library</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function postUpdate(url, data) {
+        if (!confirm("Are you sure you want to update this?")) return;
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (res.ok) alert(result.message);
+            else alert("Error: " + result.error);
+        } catch (e) {
+            alert("Request Failed");
+        }
+    }
+
+    function updateStudent(userId) {
+        postUpdate('/admin/update_student', {
+            user_id: userId,
+            roll_no: document.getElementById('edit-roll').value,
+            course: document.getElementById('edit-course').value,
+            year: document.getElementById('edit-year').value
+        });
+    }
+
+    function updateAcademics(userId) {
+        postUpdate('/admin/update_academics', {
+            user_id: userId,
+            gpa: document.getElementById('edit-gpa').value,
+            subjects: document.getElementById('edit-subjects').value
+        });
+    }
+
+    function updateAttendance(userId) {
+        postUpdate('/admin/update_attendance', {
+            user_id: userId,
+            total_classes: document.getElementById('edit-total-classes').value,
+            attended_classes: document.getElementById('edit-attended').value,
+            percentage: document.getElementById('edit-percentage').value
+        });
+    }
+
+    function updateFees(userId) {
+        postUpdate('/admin/update_fees', {
+            user_id: userId,
+            total_fee: document.getElementById('edit-total-fee').value,
+            paid: document.getElementById('edit-paid').value,
+            due: document.getElementById('edit-due').value
+        });
+    }
+
+    function updateExams(userId) {
+        postUpdate('/admin/update_exams', {
+            user_id: userId,
+            exam_name: document.getElementById('edit-exam-name').value,
+            score: document.getElementById('edit-score').value,
+            result: document.getElementById('edit-result').value
+        });
+    }
+
+    function updateLibrary(userId) {
+        postUpdate('/admin/update_library', {
+            user_id: userId,
+            books_issued: document.getElementById('edit-books').value,
+            fine: document.getElementById('edit-fine').value
+        });
+    }
+</script>
+
+<style>
+    .form-input {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-input:focus {
+        border-color: var(--accent-color);
+        background: rgba(0, 0, 0, 0.4);
+        outline: none;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(139, 92, 246, 0.25), var(--shadow-glow);
+    }
+</style>
+{% else %}
+<!-- Default Admin Stats -->
+<div class="grid">
+    <div class="glass stat-card tilt-card">
+        <h3>Total Students</h3>
+        <div class="value">1,250</div>
+    </div>
+    <div class="glass stat-card tilt-card">
+        <h3>Faculty Members</h3>
+        <div class="value">120</div>
+    </div>
+    <div class="glass stat-card tilt-card">
+        <h3>Pending Requests</h3>
+        <div class="value">5</div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

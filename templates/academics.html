@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Academics{% endblock %}
+
+{% block content %}
+<div class="glass" style="padding: 2rem;">
+    <h2>Academic Performance</h2>
+    <div style="margin-top: 1rem;">
+        <h3 style="color: var(--text-secondary);">Current GPA</h3>
+        <p style="font-size: 2.5rem; font-weight: bold; margin: 0.5rem 0; color: #10b981;">{{ data['gpa'] }}</p>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <h3>Enrolled Subjects</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in data['subjects'].split(',') %}
+                <tr>
+                    <td>{{ subject.strip() }}</td>
+                    <td><span
+                            style="padding: 4px 8px; background: rgba(16, 185, 129, 0.2); color: #10b981; border-radius: 4px; font-size: 0.8rem;">Active</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

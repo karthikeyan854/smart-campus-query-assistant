@@ -1,0 +1,255 @@
+{
+    "timings": {
+        "college_hours": "08:30 AM - 04:30 PM",
+        "library_hours": "08:00 AM - 08:00 PM (Weekdays), 09:00 AM - 04:00 PM (Weekends)",
+        "office_hours": "09:00 AM - 05:00 PM"
+    },
+    "bus_routes": [
+        "Route 1: Central Station -> College (via Main Road)",
+        "Route 2: Airport -> College (via Highway)",
+        "Route 3: North City -> College (via Beach Road)",
+        "Route 4: South City -> College (via Bypass)"
+    ],
+    "academic_calendar": {
+        "holidays": [
+            "January 26: Republic Day",
+            "August 15: Independence Day",
+            "October 2: Gandhi Jayanti",
+            "December 25: Christmas",
+            "Pongal Holidays: Jan 14-16",
+            "Diwali: 2 days (as per calendar)"
+        ],
+        "exam_dates": {
+            "semester_1": "Mid-terms: October 15-20, Finals: December 1-15",
+            "semester_2": "Mid-terms: March 10-15, Finals: May 1-15"
+        },
+        "festivals_and_functions": [
+            "Tech Fest (Unreal Tech): March 15 - March 17",
+            "Annual Day: April 10",
+            "Cultural Fest (Tarang): May 5 - May 7",
+            "Sports Meet: February 28",
+            "Freshers Day: September 15",
+            "Graduation Day: July 20"
+        ]
+    },
+    "placements": {
+        "placement_percentage": "95%",
+        "highest_package": "45 LPA (Google)",
+        "average_package": "8.5 LPA",
+        "top_recruiters": [
+            "Google",
+            "Microsoft",
+            "Amazon",
+            "TCS",
+            "Accenture",
+            "Zoho"
+        ],
+        "tie_up_companies": [
+            "IBM (for Cloud Computing Lab)",
+            "Oracle (for Database Training)",
+            "Cisco (for Networking Academy)"
+        ],
+        "placement_cell_contact": "placement@unreal.edu"
+    },
+    "internship_support": {
+        "policy": "Students are allowed 6-month internships in the final semester.",
+        "partners": [
+            "Internshala",
+            "Local Startups Hub"
+        ],
+        "process": "Apply via ERP portal > Get OD approval > Submit completion certificate."
+    },
+    "library": {
+        "info": "The central library houses over 50,000 volumes, including e-books and journals. Students can access IEEE and ACM digital libraries free of cost.",
+        "rules": [
+            "Silence must be maintained strictly.",
+            "Maximum 3 books per student can be issued for 14 days.",
+            "Fine for delay in returning books: ₹5 per day.",
+            "Mobile phones are strictly prohibited in the reading hall."
+        ]
+    },
+    "hostel": {
+        "facilities": {
+            "boys_hostel": "Block A & B (Inside Campus, Wi-Fi enabled)",
+            "girls_hostel": "Block C & D (Near Main Gate, Wi-Fi enabled, High Security)"
+        },
+        "rules": [
+            "Curfew is strictly at 09:00 PM.",
+            "Study hours are from 09:30 PM to 11:30 PM (No loud music or roaming in corridors).",
+            "Cooking appliances (heaters, induction stoves) are not allowed in rooms.",
+            "Visitors are only allowed on weekends between 10 AM and 5 PM in the visitor lounge."
+        ]
+    },
+    "departments_and_hods": [
+        {
+            "name": "BCA (Computer Applications)",
+            "hod_name": "Dr. Alan Turing",
+            "hod_qualification": "Ph.D. in Computer Science (AI Spec.)"
+        },
+        {
+            "name": "B.Tech (Engineering)",
+            "hod_name": "Dr. Grace Hopper",
+            "hod_qualification": "Ph.D. in Software Engineering",
+            "specializations": [
+                "CSE",
+                "IT",
+                "ECE"
+            ]
+        },
+        {
+            "name": "B.Sc (Sciences)",
+            "hod_name": "Dr. Marie Curie",
+            "hod_qualification": "Ph.D. in Physics"
+        },
+        {
+            "name": "BBA (Business Administration)",
+            "hod_name": "Dr. Philip Kotler",
+            "hod_qualification": "Ph.D. in Management"
+        },
+        {
+            "name": "B.Com (Commerce)",
+            "hod_name": "Dr. Raghuram Rajan",
+            "hod_qualification": "Ph.D. in Economics & Finance"
+        },
+        {
+            "name": "B.A. (Arts & Humanities)",
+            "hod_name": "Dr. Amartya Sen",
+            "hod_qualification": "Ph.D. in Economics"
+        },
+        {
+            "name": "MBA (Master of Business Administration)",
+            "hod_name": "Dr. Peter Drucker",
+            "hod_qualification": "Ph.D. in Organizational Behavior"
+        },
+        {
+            "name": "MCA (Master of Computer Applications)",
+            "hod_name": "Dr. Donald Knuth",
+            "hod_qualification": "Ph.D. in Algorithms"
+        },
+        {
+            "name": "B.Arch (Architecture)",
+            "hod_name": "Dr. Zaha Hadid",
+            "hod_qualification": "Ph.D. in Architectural Design"
+        },
+        {
+            "name": "B.Pharm (Pharmacy)",
+            "hod_name": "Dr. Alexander Fleming",
+            "hod_qualification": "Ph.D. in Pharmacology"
+        }
+    ],
+    "administration_and_staff": {
+        "college_members": [
+            {
+                "role": "Principal",
+                "name": "Dr. APJ Abdul Kalam",
+                "qualification": "Ph.D. in Aerospace Engineering, D.Sc"
+            },
+            {
+                "role": "Vice Principal",
+                "name": "Dr. S. Ramanujan",
+                "qualification": "Ph.D. in Mathematics"
+            },
+            {
+                "role": "Dean of Academics",
+                "name": "Dr. C.V. Raman",
+                "qualification": "Ph.D. in Physics"
+            }
+        ],
+        "major_teaching_staff": [
+            {
+                "name": "Prof. Linus Torvalds",
+                "department": "B.Tech CSE",
+                "qualification": "M.Tech, Operating Systems Expert"
+            },
+            {
+                "name": "Prof. Tim Berners-Lee",
+                "department": "BCA",
+                "qualification": "M.Sc. in IT, Web Tech Expert"
+            },
+            {
+                "name": "Dr. Ada Lovelace",
+                "department": "B.Tech IT",
+                "qualification": "Ph.D. in Mathematics & Analytics"
+            },
+            {
+                "name": "Prof. Dennis Ritchie",
+                "department": "B.Tech CSE",
+                "qualification": "M.Tech, System Programming"
+            },
+            {
+                "name": "Dr. Homi Bhabha",
+                "department": "B.Sc Physics",
+                "qualification": "Ph.D. in Nuclear Physics"
+            }
+        ]
+    },
+    "fees_structure": {
+        "BCA": "₹50,000 per semester",
+        "B.Tech": "₹80,000 per semester",
+        "B.Sc": "₹35,000 per semester",
+        "BBA": "₹45,000 per semester",
+        "B.Com": "₹40,000 per semester",
+        "B.A.": "₹30,000 per semester",
+        "MBA": "₹1,00,000 per semester",
+        "MCA": "₹60,000 per semester",
+        "B.Arch": "₹90,000 per semester",
+        "B.Pharm": "₹70,000 per semester",
+        "Hostel_Fee": "₹40,000 per year (includes mess)"
+    },
+    "student_statistics": {
+        "total_college_strength": "5,500 students",
+        "average_students_per_class": "60 students"
+    },
+    "general_timetable_structure": {
+        "periods": 8,
+        "class_duration": "50 minutes per period",
+        "lunch_break": "12:30 PM - 01:20 PM",
+        "tea_break": "10:30 AM - 10:45 AM"
+    },
+    "value_added_programs": {
+        "extra_courses": [
+            "AWS Cloud Practitioner Certification",
+            "Full Stack Web Development Bootcamp",
+            "Data Science and Machine Learning using Python",
+            "Foreign Languages: German, French, Japanese"
+        ],
+        "skill_development": [
+            "Weekly Soft Skills & Communication English classes",
+            "Aptitude Training for Placements (Year 3 & 4)",
+            "Mock Interviews by Industry Experts"
+        ]
+    },
+    "sports_facilities": {
+        "outdoor": "Cricket Ground, Football Field, 400m Athletics Track",
+        "indoor": "Badminton Courts, Table Tennis, Chess, Carrom",
+        "gym": "Available for both boys and girls (Timings: 6 AM - 8 AM, 5 PM - 8 PM)",
+        "achievements": "State-level champions in Volleyball and Basketball (2023)"
+    },
+    "student_benefits_and_freebies": [
+        "Free High-Speed Wi-Fi across the campus.",
+        "Free Microsoft Office 365 License for all enrolled students.",
+        "Merit Scholarship: 100% fee waiver for top 3 rank holders in every department.",
+        "Free access to Gym and Indoor Sports Complex.",
+        "Subsidized transport for students from rural areas."
+    ],
+    "college_rules": {
+        "dress_code": {
+            "general_rule": "Students must dress modestly and professionally.",
+            "males": "Formal shirts and trousers or neat jeans with collared t-shirts. Shorts, torn jeans, and round-neck graphic tees are not allowed.",
+            "females": "Salwar kameez, kurtis, or formal western wear (shirts and trousers). Sleeveless tops and short skirts are not permitted."
+        },
+        "disciplinary_rules": [
+            "ID Cards must be worn visibly at all times inside the campus.",
+            "75% attendance is strictly mandatory to write semester exams.",
+            "Ragging is a criminal offense and will lead to immediate suspension and police complaint.",
+            "Use of mobile phones is strictly banned inside classrooms and labs."
+        ],
+        "fines_and_suspension": [
+            "Late Fee Payment: ₹50 per week.",
+            "Without ID Card: ₹100 fine per day.",
+            "Malpractice in Exams: Immediate suspension for current semester.",
+            "Damage to Lab Equipment: Fine equivalent to the cost of equipment + 20% penalty.",
+            "Smoking/Drinking on campus: Immediate suspension for 1 month and ₹5000 fine."
+        ]
+    }
+}

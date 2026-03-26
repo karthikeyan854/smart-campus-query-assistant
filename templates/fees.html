@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Fees Details{% endblock %}
+
+{% block content %}
+<div class="glass" style="padding: 2rem;">
+    <h2>Fee Structure</h2>
+
+    <div class="grid" style="margin-top: 2rem;">
+        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
+            <h3>Total Fee</h3>
+            <p style="font-size: 1.8rem; margin: 0.5rem 0;">₹{{ data['total_fee'] }}</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
+            <h3>Paid Amount</h3>
+            <p style="font-size: 1.8rem; margin: 0.5rem 0; color: #10b981;">₹{{ data['paid'] }}</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px;">
+            <h3>Due Amount</h3>
+            <p style="font-size: 1.8rem; margin: 0.5rem 0; color: {{ '#ef4444' if data['due'] > 0 else '#94a3b8' }};">
+                ₹{{ data['due'] }}
+            </p>
+        </div>
+    </div>
+
+    {% if data['due'] > 0 %}
+    <div style="margin-top: 2rem; text-align: right;">
+        <button class="btn-primary" style="width: auto; padding: 0.8rem 2rem;">Pay Online</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

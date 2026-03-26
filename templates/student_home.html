@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <!-- GPA Card -->
+    <div class="glass stat-card tilt-card">
+        <h3>Current CGPA</h3>
+        <div class="value">{{ academics['gpa'] }}</div>
+        <p style="font-size: 0.8rem; margin:0; opacity: 0.7;">Keep it up!</p>
+    </div>
+
+    <!-- Attendance Card -->
+    <div class="glass stat-card tilt-card">
+        <h3>Attendance</h3>
+        <div class="value">
+            {{ attendance['percentage']|round(1) }}%
+        </div>
+        <p style="font-size: 0.8rem; margin:0; opacity: 0.7;">{{ attendance['attended_classes'] }}/{{
+            attendance['total_classes'] }} Classes</p>
+    </div>
+
+    <!-- Fees Card -->
+    <div class="glass stat-card tilt-card">
+        <h3>Fee Due</h3>
+        <div class="value">
+            ₹{{ fees['due'] }}
+        </div>
+        <p style="font-size: 0.8rem; margin:0; opacity: 0.7;">Paid: ₹{{ fees['paid'] }}</p>
+    </div>
+
+    <!-- Exam Result Card -->
+    <div class="glass stat-card tilt-card">
+        <h3>Last Exam Result</h3>
+        <div class="value">{{ exams['result'] }}</div>
+        <p style="font-size: 0.8rem; margin:0; opacity: 0.7;">{{ exams['exam_name'] }}: {{ exams['score'] }}/100</p>
+    </div>
+</div>
+
+<div class="glass" style="padding: 1.5rem;">
+    <h3 style="margin-top: 0;">Recent Announcements</h3>
+    <ul style="padding-left: 1.2rem; line-height: 1.6; color: var(--text-secondary);">
+        <li>Mid-semester exams start from next Monday.</li>
+        <li>Library will remain closed on Sunday.</li>
+        <li>Annual Sports Meet registration is open.</li>
+    </ul>
+</div>
+{% endblock %}

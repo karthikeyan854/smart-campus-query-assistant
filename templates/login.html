@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Campus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .error {
+            color: #ef4444;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Moving Professional Background -->
+    <div class="bg-animated"></div>
+
+    <div class="login-container">
+        <div class="glass login-box tilt-card">
+            <h2>Unreal University Login</h2>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter ID" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: #94a3b8;">
+                Demo: 2024001 / pass_2024001
+            </p>
+        </div>
+    </div>
+    <script>
+        // 3D Tilt Card Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tiltCards = document.querySelectorAll('.tilt-card');
+
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -10;
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

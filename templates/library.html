@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Library{% endblock %}
+
+{% block content %}
+<div class="glass" style="padding: 2rem;">
+    <h2>Library Status</h2>
+
+    <div style="margin-top: 2rem;">
+        <h3>Books Currently Issued</h3>
+        {% if data['books_issued'] %}
+        <ul>
+            {% for book in data['books_issued'].split(',') %}
+            <li style="margin-bottom: 0.5rem;">{{ book.strip() }} (Due: Next Week)</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p style="color: var(--text-secondary);">No books issued.</p>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 2rem; padding-top: 1rem; border-top: var(--glass-border);">
+        <h3 style="display:flex; justify-content: space-between;">
+            Outstanding Fines:
+            <span style="color: {{ '#ef4444' if data['fine'] > 0 else '#10b981' }};">₹{{ data['fine'] }}</span>
+        </h3>
+    </div>
+</div>
+{% endblock %}

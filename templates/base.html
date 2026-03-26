@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unreal University</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</head>
+
+<body>
+
+    <!-- Moving Professional Background -->
+    <div class="bg-animated"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <ion-icon name="rocket-outline"></ion-icon> Unreal University
+            </div>
+            <ul class="nav-links">
+                {% if session['role'] == 'admin' %}
+                <!-- Admin Sidebar -->
+                <li><a href="/admin" class="{{ 'active' if request.path == '/admin' else '' }}">
+                        <ion-icon name="grid-outline"></ion-icon> Dashboard</a>
+                </li>
+                <li><a href="/admin/students" class="{{ 'active' if request.path == '/admin/students' else '' }}">
+                        <ion-icon name="people-outline"></ion-icon> Manage Students</a>
+                </li>
+                {% else %}
+                <!-- Student Sidebar -->
+                <li><a href="/student" class="{{ 'active' if request.path == '/student' else '' }}">
+                        <ion-icon name="grid-outline"></ion-icon> Dashboard</a>
+                </li>
+                <li><a href="/academics" class="{{ 'active' if request.path == '/academics' else '' }}">
+                        <ion-icon name="book-outline"></ion-icon> Academics</a>
+                </li>
+                <li><a href="/attendance" class="{{ 'active' if request.path == '/attendance' else '' }}">
+                        <ion-icon name="calendar-outline"></ion-icon> Attendance</a>
+                </li>
+                <li><a href="/fees" class="{{ 'active' if request.path == '/fees' else '' }}">
+                        <ion-icon name="card-outline"></ion-icon> Fees</a>
+                </li>
+                <li><a href="/exams" class="{{ 'active' if request.path == '/exams' else '' }}">
+                        <ion-icon name="pencil-outline"></ion-icon> Exams</a>
+                </li>
+                <li><a href="/library" class="{{ 'active' if request.path == '/library' else '' }}">
+                        <ion-icon name="library-outline"></ion-icon> Library</a>
+                </li>
+                {% endif %}
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1>{% block title %}Dashboard{% endblock %}</h1>
+                <div class="user-profile">
+                    <span>{{ session['username'] }} ({{ session['roll_no'] }})</span>
+                    <a href="/logout" style="color: #ef4444; text-decoration: none;">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chat-widget" onclick="toggleChat()">
+        <!-- Greeting Bubble -->
+        <div class="chat-greeting">Hii!</div>
+
+        <!-- Waving Hand -->
+        <div class="chat-hand">👋</div>
+
+        <!-- AI Face Character -->
+        <div class="chat-bot-character">
+            <!-- Glowing Head/Visor -->
+            <div class="bot-visor">
+                <div class="bot-eye left"></div>
+                <div class="bot-eye right"></div>
+            </div>
+            <div class="bot-mouth"></div>
+        </div>
+    </div>
+
+    <div class="glass chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>AI Assistant</span>
+            <ion-icon name="close-outline" style="cursor: pointer;" onclick="toggleChat()"></ion-icon>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="message bot">
+                Hi! I'm your AI assistant. Ask me about fees, exams, or attendance!
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()"><ion-icon name="send"></ion-icon></button>
+        </div>
+    </div>
+
+    <script>
+        // Chatbot Logic
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            if (chatWindow.classList.contains('active')) {
+                chatWindow.classList.remove('active');
+            } else {
+                chatWindow.classList.add('active');
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add User Message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Fetch Response
+            fetch('/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    addMessage(data.reply, 'bot');
+                });
+        }
+
+        function addMessage(text, sender) {
+            const chatBody = document.getElementById('chatBody');
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', sender);
+            msgDiv.innerText = text;
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // 3D Tilt Card Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tiltCards = document.querySelectorAll('.tilt-card');
+
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // x position within the element.
+                    const y = e.clientY - rect.top; // y position within the element.
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    // Calculate rotation based on cursor distance from center
+                    const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
