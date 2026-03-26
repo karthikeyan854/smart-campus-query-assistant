@@ -20,7 +20,7 @@ A modern, highly interactive, and intelligent campus management system with an i
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/Smart-campus-query-assistant.git
+git clone https://github.com/karthikeyan854/smart-campus-query-assistant.git
 cd Smart-campus-query-assistant
 ```
 
